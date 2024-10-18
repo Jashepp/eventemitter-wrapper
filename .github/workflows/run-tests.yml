@@ -17,44 +17,10 @@ on:
 
 jobs:
   
-  tests:
-    name: Run Tests with Node.js ${{ matrix.node }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ lts/*, latest, 16, 18, 20 ]
-    steps:
+  run-tests-node:
+    name: Node Tests
+    uses: ./.github/workflows/run-tests-node.yml
 
-      # https://github.com/actions/cache/blob/main/examples.md#node---npm
-      - name: Get npm cache directory
-        id: npm-cache-dir
-        shell: bash
-        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
-
-      # https://github.com/actions/cache/releases
-      - name: Use cache for npm
-        uses: actions/cache@v3.3.1
-        id: npm-cache
-        with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: npm-${{ hashFiles('package.json') }}
-          restore-keys: npm-
-
-      # https://github.com/actions/checkout/releases
-      - name: Checkout
-        uses: actions/checkout@v3.6.0
-
-      - name: Build package-lock
-        run: npm i --package-lock-only
-
-      # https://github.com/actions/setup-node/releases
-      - name: Setup Node.js
-        uses: actions/setup-node@v3.8.1
-        with:
-          node-version: ${{ matrix.node }}
-      
-      - name: Clean & Install Deps
-        run: npm ci
-
-      - name: Run Tests
-        run: npm test
+  run-tests-deno:
+    name: Deno Tests
+    uses: ./.github/workflows/run-tests-deno.yml
