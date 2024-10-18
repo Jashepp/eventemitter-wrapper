@@ -1,11 +1,12 @@
-"use strict";
 
 // https://mochajs.org/
 
-const _ = require("underscore");
-const chai = require("chai");
+import * as chai from "chai";
+import _ from "underscore";
+
 const { expect, assert, should } = chai;
 
+const require = (await import('node:module')).createRequire(import.meta.url);
 const EventEmitter = require('node:events');
 let EventEmitterWrapper = null;
 
@@ -18,11 +19,11 @@ describe("Require / Import",async ()=>{
 	});
 
 	it("import module.mjs",async function(){
-		const modileEEW = await import('../module.mjs');
-		expect(modileEEW).to.have.property('EventEmitterWrapper');
-		expect(modileEEW).to.have.property('createWrapper');
+		const moduleEEW = await import('../module.mjs');
+		expect(moduleEEW).to.have.property('EventEmitterWrapper');
+		expect(moduleEEW).to.have.property('createWrapper');
 		// createRequire causes new copy
-		// expect(modileEEW.EventEmitterWrapper).to.equal(EventEmitterWrapper.EventEmitterWrapper);
+		// expect(moduleEEW.EventEmitterWrapper).to.equal(EventEmitterWrapper.EventEmitterWrapper);
 	});
 
 });

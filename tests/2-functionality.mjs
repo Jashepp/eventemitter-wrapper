@@ -1,4 +1,3 @@
-"use strict";
 
 // https://mochajs.org/
 // https://www.chaijs.com/api/bdd/
@@ -6,15 +5,17 @@
 // https://www.chaijs.com/plugins/sinon-chai/
 // https://sinonjs.org/
 
-const _ = require("underscore");
-const chai = require("chai");
-const sinon = require("sinon");
-const sinonChai = require("sinon-chai");
+import * as chai from "chai";
+import sinon from "sinon";
+import sinonChai from "sinon-chai";
+import _ from "underscore";
+
 const { expect, assert, should } = chai;
 chai.use(sinonChai);
 
+const require = (await import('node:module')).createRequire(import.meta.url);
 const EventEmitter = require('node:events');
-const EventEmitterWrapper = require('../');
+const EventEmitterWrapper = require('..');
 
 describe("EventEmitter Compatability - Functionality",async ()=>{
 	let events = null, wrapper = null;

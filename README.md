@@ -7,7 +7,7 @@
 
 ## What is this?
 
-This module lets you group event listeners so you can seperate/isolate listeners from other listeners, such that you can call `removeAllListeners` and it will only remove the listeners on the current event wrapper. No need to keep track of specific groups of listeners when this can do it for you.
+This module lets you group event listeners so you can separate/isolate listeners from other listeners, such that you can call `removeAllListeners` and it will only remove the listeners on the current event wrapper. No need to keep track of specific groups of listeners when this can do it for you.
 
 ## Why use this?
 
@@ -162,10 +162,8 @@ To run the tests, run:
 npm run test
 ```
 
-To continuously run tests while editing, run:
-```
-npm run test-watch
-```
+~~To continuously run tests while editing, run: `npm run test-watch`~~  
+`test-watch` currently [not supported](https://github.com/mochajs/mocha/issues/4374) with mocha, chai & sinon moving to ESM. There are [workarounds](https://github.com/mochajs/mocha/issues/4374#issuecomment-1366536787).
 
 ## Contributors
 
